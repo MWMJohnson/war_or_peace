@@ -83,7 +83,7 @@ RSpec.describe Turn do
     
   end
 
-  it 'classifies turns' do
+  it 'decides a winner' do
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -103,7 +103,7 @@ RSpec.describe Turn do
     player2 = Player.new('Aurora', deck2)
 
     turn = Turn.new(player1, player2)
-    expect(turn.winner).to eq(winner)
+    expect(turn.winner).to eq(player2)
     
   end
 
