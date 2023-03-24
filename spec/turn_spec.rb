@@ -126,8 +126,10 @@ RSpec.describe Turn do
     player2 = Player.new('Aurora', deck2)
 
     turn = Turn.new(player1, player2)
-    expect(player1.deck).to eq([card2, card5, card6])
-    expect(player2.deck).to eq([card4, card6, card7])
+    turn.pile_cards
+    expect(player1.deck.cards).to eq([card2, card5, card8])
+    expect(player2.deck.cards).to eq([card4, card6, card7])
+    expect(turn.spoils_of_war).to eq([card1, card3])
   end
 
 
