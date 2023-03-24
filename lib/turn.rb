@@ -12,33 +12,35 @@ class Turn
 
   def type
     if @player1.deck.rank_of_card_at(0) != @player2.deck.rank_of_card_at(0)
-      type = :basic
+      :basic
     elsif
       @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
-      type = :war
+      :war
     else
       if
       @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0) &&
       @player1.deck.rank_of_card_at(2) == @player2.deck.rank_of_card_at(2)
-      type = :mutually_assured_destruction
+      :mutually_assured_destruction
       end
     end
   end
 
   def winner
-    if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
+    if type == :basic
+      @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
       @player1
-    elsif @player1.deck.rank_of_card_at(0) < @player2.deck.rank_of_card_at(0)
+    else 
       @player2
-    else
-      if @player1.deck.rank_of_card_at(2) > @player2.deck.rank_of_card_at(2)
-        @player1
-      elsif @player1.deck.rank_of_card_at(2) < @player2.deck.rank_of_card_at(2)
-        @player2
-      else
-        "no winner"
-      end
     end
   end
+
+  def pile_cards
+    if type == :basic
+      @spoils_of_war << player1.deck.remove_card
+      @spoils_of_war << player2.deck.remove_card
+    end
+  end
+  
+
 
 end
